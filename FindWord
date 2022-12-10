@@ -1,0 +1,44 @@
+//
+// Created by minthukha25122003@gmail.com on 06/12/2022.
+//
+
+#include"stdio.h"
+#include"stdlib.h"
+#include"string.h"
+int main() {
+    int count = 0;
+    int result = 0;
+    int status = 0;
+    int press = 0;
+    char word[100];
+    char findWord[100];
+
+    FILE *fptr1;
+    fptr1 = fopen("words.txt", "r");
+
+    if (fptr1 == NULL) {
+        printf("File cannot open!");
+    } else {
+
+            printf("Please enter you want to find a word: ");
+            scanf("%s", &findWord);
+            while (fscanf(fptr1, "%s", word) != EOF) {
+                if (strcmp(word, findWord) == 0) {
+                    status = 1;
+                    count++;
+                } else {
+                    result = 1;
+                }
+            }
+            if (status == 1){
+                printf("You found this word %d times\n",count);
+                exit(0);
+            }
+            if (result == 1){
+                printf("Not found in text sentence\n");
+                exit(0);
+            }
+    }
+    fclose(fptr1);
+    return 0;
+}
